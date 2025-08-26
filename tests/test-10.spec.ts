@@ -27,8 +27,9 @@ test('testf', async ({ page }) => {
   await page.getByTestId('nm_kwn_for_0').getByText('A League of Their Own').click();
   await expect(page.getByRole('link', { name: 'View ’A League of Their Own’' })).toBeVisible();
   
-
+page.goBack()
        
-  
+  await page.getByTestId('nm_kwn_for_2').getByText('Desperately Seeking Susan').click();
+  await expect(page.getByTestId('hero__primary-text')).toContainText('Desperately Seeking Susan');
 
 });
