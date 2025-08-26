@@ -1,0 +1,56 @@
+import { test, expect } from '@playwright/test';
+
+test('test', async ({ page }) => {
+   await page.setViewportSize({ width: 1920, height: 1080 });
+  await page.goto('https://www.themoviedb.org/');
+  await page.getByPlaceholder('Search for a movie, tv show, person...', { exact: true }).click();
+   await page.getByPlaceholder('Search for a movie, tv show, person...', { exact: true }).fill('Reese Witherspoon');
+    await page.getByText('Reese Witherspoon in People').click();
+   await page.getByText('Reese Witherspoon', { exact: true }).click();
+ 
+  
+  await page.getByRole('link', { name: 'Reese Witherspoon', exact: true }).click();
+  await expect(page.locator('#media_v4')).toContainText('Reese Witherspoon');
+ 
+ 
+  await page.getByRole('listitem').filter({ hasText: 'This Means War' }).locator('div').getByRole('link').click();
+  await page.getByRole('link', { name: 'This Means War' }).click();
+  await expect(page.locator('#original_header')).toContainText('This Means War');
+
+  await page.locator('#media_scroller').getByRole('link').click();
+
+
+  await page.getByRole('dialog', { name: 'This Means War (2012) Trailer' }).locator('iframe').contentFrame().locator('video').click();
+});
+
+test('Reese Witherspoon Known For proklik2', async ({ page }) => {
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await page.goto('https://www.themoviedb.org/');
+
+  // Vyhledání herečky
+  await page.getByPlaceholder('Search for a movie, tv show, person...', { exact: true }).click();
+  await page.getByPlaceholder('Search for a movie, tv show, person...', { exact: true }).fill('Reese Witherspoon');
+  await page.getByText('Reese Witherspoon in People').click();
+
+  // Kliknutí na samotnou herečku
+  await page.getByText('Reese Witherspoon', { exact: true }).click();
+  await expect(page.locator('#media_v4')).toContainText('Reese Witherspoon');
+
+
+ await page.getByRole('listitem').filter({ hasText: 'Legally Blonde' }).locator('div').getByRole('link').click();
+
+await page.getByRole('link', { name: 'Expand' }).click();
+await page.locator('.wrapper.next_id').click();
+await page.locator('#paging').getByRole('link').nth(1).click();
+await page.getByRole('heading').filter({ hasText: /^$/ }).getByRole('link').click();
+
+});
+
+
+
+
+
+
+  
+
+
