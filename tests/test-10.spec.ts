@@ -33,3 +33,17 @@ page.goBack()
   await expect(page.getByTestId('hero__primary-text')).toContainText('Desperately Seeking Susan');
 
 });
+
+test('testm', async ({ page }) => {
+  await page.goto('https://www.imdb.com/');
+    await page.getByTestId('reject-button').click();
+  await page.getByTestId('suggestion-search').click();
+  await page.getByTestId('suggestion-search').fill('Madonna');
+ 
+  await page.getByRole('link', { name: 'Madonna Madonna Actress, A' }).click();
+  await page.getByTestId('nm_kwn_for_1').getByText('Evita').click();
+  await expect(page.getByRole('link', { name: 'View ’Evita’' })).toBeVisible();
+  
+
+
+});
