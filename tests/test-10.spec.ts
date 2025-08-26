@@ -19,16 +19,16 @@ test('test', async ({ page }) => {
 
 test('testf', async ({ page }) => {
   await page.goto('https://www.imdb.com/');
+    await page.getByTestId('reject-button').click();
   await page.getByTestId('suggestion-search').click();
   await page.getByTestId('suggestion-search').fill('Madonna');
-  await page.getByRole('link', { name: 'Madonna' }).click();
-  await page.getByTestId('reject-button').click();
-  await expect(page.getByTestId('hero__primary-text')).toContainText('Madonna');
-  await page.getByTestId('accordion-item-producer-previous-projects').click();
-  await page.getByText('Madonna x Vanity Fair: The Enlightenment').click();
-   await expect(page.getByTestId('hero__primary-text')).toContainText('Madonna x Vanity Fair: The Enlightenment');
-  await page.getByRole('link', { name: 'Watch Official Trailer' }).nth(1).click   ();
-  await page.getByRole('button', { name: 'Play' }).click ();      
+ 
+  await page.getByRole('link', { name: 'Madonna Madonna Actress, A' }).click();
+  await page.getByTestId('nm_kwn_for_0').getByText('A League of Their Own').click();
+  await expect(page.getByRole('link', { name: 'View ’A League of Their Own’' })).toBeVisible();
+  
+
+       
   
 
 });
