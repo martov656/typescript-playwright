@@ -11,7 +11,7 @@ test('test', async ({ page }) => {
   await page.getByText('Eva Longoria: Searching for Mexico').click();
    await expect(page.getByTestId('hero__primary-text')).toContainText('Eva Longoria: Searching for Mexico');
   await page.getByRole('link', { name: 'Watch Official Trailer' }).nth(1).click   ();
-  await page.getByRole('button', { name: 'Play' }).click ();      
+     
   
  
 });
@@ -44,6 +44,24 @@ test('testm', async ({ page }) => {
   await page.getByTestId('nm_kwn_for_1').getByText('Evita').click();
   await expect(page.getByRole('link', { name: 'View ’Evita’' })).toBeVisible();
   
+
+
+});
+
+test('testReese', async ({ page }) => {
+  await page.goto('https://www.imdb.com/');
+    await page.getByTestId('reject-button').click();
+  await page.getByTestId('suggestion-search').click();
+  await page.getByTestId('suggestion-search').fill('Reese Witherspoon');
+  await page.getByRole('link', { name: 'Reese Witherspoon Reese' }).click();
+  await expect(page.getByTestId('hero__primary-text')).toContainText('Reese Witherspoon');
+
+
+await page.getByTestId('cred_producer_12').getByText('The Morning Show').click();
+await expect(page.getByTestId('hero__primary-text')).toContainText('The Morning Show');
+await page.getByTestId('mosaic-img-0-0').click();
+await expect(page.getByTestId('media-viewer__touch-handler')).toBeVisible();
+await page.getByTestId('mv-breadcrumb-close-button').click();
 
 
 });

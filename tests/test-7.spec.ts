@@ -51,4 +51,6 @@ await page.waitForTimeout(500); // krátké čekání
 
 });
 
+
+
 });
