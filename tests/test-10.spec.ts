@@ -10,9 +10,25 @@ test('test', async ({ page }) => {
   await page.getByTestId('accordion-item-producer-previous-projects').click();
   await page.getByText('Eva Longoria: Searching for Mexico').click();
    await expect(page.getByTestId('hero__primary-text')).toContainText('Eva Longoria: Searching for Mexico');
-  await page.getByRole('link', { name: 'Watch Official Trailer' }).nth(1).click();
-  await page.getByRole('button', { name: 'Play' }).click();
+  await page.getByRole('link', { name: 'Watch Official Trailer' }).nth(1).click   ();
+  await page.getByRole('button', { name: 'Play' }).click ();      
   
  
 });
 
+
+test('testf', async ({ page }) => {
+  await page.goto('https://www.imdb.com/');
+  await page.getByTestId('suggestion-search').click();
+  await page.getByTestId('suggestion-search').fill('Madonna');
+  await page.getByRole('link', { name: 'Madonna' }).click();
+  await page.getByTestId('reject-button').click();
+  await expect(page.getByTestId('hero__primary-text')).toContainText('Madonna');
+  await page.getByTestId('accordion-item-producer-previous-projects').click();
+  await page.getByText('Madonna x Vanity Fair: The Enlightenment').click();
+   await expect(page.getByTestId('hero__primary-text')).toContainText('Madonna x Vanity Fair: The Enlightenment');
+  await page.getByRole('link', { name: 'Watch Official Trailer' }).nth(1).click   ();
+  await page.getByRole('button', { name: 'Play' }).click ();      
+  
+
+});
