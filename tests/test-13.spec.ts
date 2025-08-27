@@ -52,3 +52,42 @@ await page.getByRole('link', { name: 'Srdečně vás zveme' }).first().click();
   
 
 });
+
+
+test('testreese4', async ({ page }) => {
+  await page.goto('https://www.super.cz/');
+  
+
+await page.getByRole('textbox', { name: 'Vyhledat' }).fill('Reese Witherspoon');
+
+await page.getByRole('button', { name: 'Reese Witherspoonová', exact: true }).click();
+
+
+await page.getByRole('link', { name: 'Reese Witherspoon | ČSFD.cz' }).click();
+await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
+await expect(page.locator('h1')).toContainText('Reese Witherspoon');
+await page.getByRole('link', { name: 'U tebe nebo u mě?' }).first().click();
+
+
+  
+
+});
+
+test('testreese5', async ({ page }) => {
+  await page.goto('https://www.super.cz/');
+  
+
+await page.getByRole('textbox', { name: 'Vyhledat' }).fill('Reese Witherspoon');
+
+await page.getByRole('button', { name: 'Reese Witherspoonová', exact: true }).click();
+
+
+await page.getByRole('link', { name: 'Reese Witherspoon | ČSFD.cz' }).click();
+await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
+await expect(page.locator('h1')).toContainText('Reese Witherspoon');
+await page.getByRole('link', { name: 'The Morning Show' }).first().click();
+
+
+  
+
+});
