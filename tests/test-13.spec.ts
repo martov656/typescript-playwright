@@ -161,7 +161,7 @@ await page.getByRole('button', { name: 'Reese Witherspoonová', exact: true }).c
 await page.getByRole('link', { name: 'Reese Witherspoon | ČSFD.cz' }).click();
 await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
 await expect(page.locator('h1')).toContainText('Reese Witherspoon');
-await page.getByRole('link', { name: 'tohle je válka!' }).first().click();
+await page.getByRole('link', { name: 'Tohle je válka!' }).first().click();
 
 
   
