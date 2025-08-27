@@ -9,10 +9,28 @@ test('test', async ({ page }) => {
   await page.getByText('Šílený Max: Zběsilá cesta', { exact: true }).click();
   await expect(page.locator('h2')).toContainText('Šílený Max: Zběsilá cesta');
 
-  await page.getByRole('link', { name: 'Hrají' }).click();
-  await page.getByRole('heading', { name: 'Charlize Theron' }).getByRole('link').click();
-  await expect(page.locator('h2')).toContainText('Charlize Theron');
+const link = page.getByRole('link', { name: 'Hrají' });
+
+// čekáme, až bude prvek viditelný
+await link.waitFor({ state: 'visible', timeout: 15000 });
+
+// posuneme do view (Firefox někdy potřebuje explicitní scroll)
+await link.scrollIntoViewIfNeeded();
+
+// klikneme na prvek
+await link.click();
+
+// nyní čekáme na odkaz "Charlize Theron"
+const charlizeLink = page.getByRole('heading', { name: 'Charlize Theron' }).getByRole('link');
+await expect(charlizeLink).toBeVisible({ timeout: 15000 });
+await charlizeLink.click();
+
+// kontrola výsledného textu
+await expect(page.locator('h2')).toContainText('Charlize Theron', { timeout: 15000 });
 });
+
+
+
 
 test('test2', async ({ page }) => {
   await page.goto('https://div.cz/');
@@ -47,10 +65,11 @@ test('test3', async ({ page }) => {
  
   await page.getByText('Šílený Max 2: Bojovník silnic', { exact: true }).click();
 
+await page.getByRole('link', { name: 'Mel Gibson' }).waitFor({ state: 'visible', timeout: 12000 });
 await page.getByRole('link', { name: 'Mel Gibson' }).click();
 await expect(page.locator('h2')).toContainText('Mel Gibson');
 await page.getByRole('link', { name: 'Miliónový hurikán' }).click();
-await expect(page.locator('h2')).toContainText('Miliónový hurikán');
+await expect(page.locator('h2')).toContainText('Miliónový hurikán', { timeout: 15000 });
   
   
 
@@ -89,7 +108,7 @@ test('testReese', async ({ page }) => {
  
   await page.getByText('Srdečně vás zveme', { exact: true }).click();
 
-await page.getByRole('link', { name: 'Reese Witherspoon' }).click();
+await page.getByRole('link', { name: 'Reese Witherspoon' }).click({ timeout: 12000 });
 await expect(page.locator('h2')).toContainText('Reese Witherspoon');
 await page.getByRole('link', { name: 'U tebe nebo u mě' }).click();
 await expect(page.locator('h2')).toContainText('U tebe nebo u mě');
@@ -109,7 +128,7 @@ test('testkate', async ({ page }) => {
  
   await page.getByText('Lee: Fotografka v první linii', { exact: true }).click();
 
-await page.getByRole('link', { name: 'Kate Winslet' }).click();
+await page.getByRole('link', { name: 'Kate Winslet' }).click({ timeout: 12000 });
 await expect(page.locator('h2')).toContainText('Kate Winslet');
 
   

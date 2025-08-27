@@ -39,10 +39,15 @@ test('Reese Witherspoon Known For proklik2', async ({ page }) => {
 
  await page.getByRole('listitem').filter({ hasText: 'Legally Blonde' }).locator('div').getByRole('link').click();
 
-await page.getByRole('link', { name: 'Expand' }).click();
-await page.locator('.wrapper.next_id').click();
-await page.locator('#paging').getByRole('link').nth(1).click();
-await page.getByRole('heading').filter({ hasText: /^$/ }).getByRole('link').click();
+
+await page.getByText('Selma Blair').click();
+await expect(page.locator('#media_v4')).toContainText('Selma Blair');
+await page.getByRole('paragraph').filter({ hasText: /^Cruel Intentions$/ }).getByRole('link').click();
+await expect(page.locator('#original_header')).toContainText('Cruel Intentions');
+
+
+await page.getByRole('link', { name: 'Play Trailer' }).click();
+await page.getByRole('dialog', { name: 'Play Trailer' }).getByLabel('Close').click();
 
 });
 
