@@ -25,9 +25,15 @@ test('testreese2', async ({ page }) => {
 await page.getByRole('textbox', { name: 'Vyhledat' }).fill('Reese Witherspoon');
 
 await page.getByRole('button', { name: 'Reese Witherspoonová', exact: true }).click();
-await page.getByRole('link', { name: 'Obrázky', exact: true }).click();
-await page.locator('.ce0f44').first().click();
-await page.getByRole('button', { name: 'Zavřít' }).click();
+
+ 
+await page.getByRole('link', { name: 'Reese Witherspoonová –' }).click();
+await expect(page.locator('#firstHeading')).toContainText('Reese Witherspoonová');
+await page.getByRole('link', { name: 'Pravá blondýnka' }).first().click();
+await expect(page.locator('#firstHeading')).toContainText('Pravá blondýnka');
+
+
+  
 
   
 
