@@ -320,3 +320,19 @@ await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).fill('Bat
 
 
    });
+
+  
+
+   test('testdab8', async ({ page }) => {
+
+  await page.goto('https://dabingforum.cz/');
+  await page.getByRole('button', { name: 'Consent', exact: true }).click();
+
+ 
+
+await page.getByRole('link', { name: 'Dabingforum.cz - filmy a seri' }).click();
+await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).click();
+await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).fill('Superman');
+
+
+   });
