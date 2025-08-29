@@ -336,3 +336,23 @@ await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).fill('Sup
 
 
    });
+
+    test('testdabreese', async ({ page }) => {
+
+  await page.goto('https://dabingforum.cz/');
+  await page.getByRole('button', { name: 'Consent', exact: true }).click();
+
+ 
+  await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).fill('Reese Witherspoon');
+  await page.getByText('Reese Witherspoon').click();
+  await expect(page.locator('h2').getByRole('link', { name: 'Reese Witherspoon' })).toBeVisible();
+  await expect(page.locator('h2')).toContainText('Reese Witherspoon');
+  await page.getByRole('link', { name: 'Lucie Benešová' }).first().click();
+  await expect(page.locator('h2')).toContainText('Lucie Benešová');
+
+
+  await page.getByRole('link', { name: 'Nicole Kidman' }).nth(2).click();
+
+     await expect(page.locator('h2')).toContainText('Nicole Kidman');
+
+   });
