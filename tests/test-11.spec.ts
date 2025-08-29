@@ -71,3 +71,20 @@ await page.getByRole('link', { name: 'Manžel na zkoušku Manžel na' }).click()
 
 await expect(page.getByRole('link', { name: 'Manžel na zkoušku', exact: true })).toBeVisible();
 });
+
+
+test('test47', async ({ page }) => {
+  await page.goto('https://www.kinobox.cz/');
+  await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
+  await page.getByPlaceholder('Hledat film, seriál...').click();
+  await page.getByPlaceholder('Hledat film, seriál...').fill('salma hayek');
+  await page.getByRole('link', { name: 'Salma Hayek Salma Hayek (1966)' }).click();
+   await expect(page.getByRole('link', { name: 'Salma Hayek', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Filmy a seriály Filmy a seriá' }).click();
+
+  
+  await page.getByRole('link', { name: 'Desperado (1995)' }).click();
+    page.goBack()
+  await page.getByRole('button', { name: 'Videa Videa' }).click();
+
+});
