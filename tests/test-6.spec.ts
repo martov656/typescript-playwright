@@ -56,9 +56,9 @@ test('testnicole5', async ({ page }) => {
   await expect(page.locator('h1')).toContainText('Nicole Kidman');
 
 
-  await page.getByRole('row', { name: 'Sedmilhářky' }).getByRole('link').click();
+  await page.getByRole('row', { name: 'Holland' }).getByRole('link').click();
 
 
-  await expect(page.locator('h1')).toContainText('Sedmilhářky');
+  await expect(page.locator('h1')).toContainText('Holland');
 
 });
