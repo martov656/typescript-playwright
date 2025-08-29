@@ -312,8 +312,6 @@ await expect(page.locator('h2')).toContainText('Christian Bale');
   await page.goto('https://dabingforum.cz/');
   await page.getByRole('button', { name: 'Consent', exact: true }).click();
 
- 
-
 await page.getByRole('link', { name: 'Dabingforum.cz - filmy a seri' }).click();
 await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).click();
 await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).fill('Batman');
@@ -327,8 +325,6 @@ await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).fill('Bat
 
   await page.goto('https://dabingforum.cz/');
   await page.getByRole('button', { name: 'Consent', exact: true }).click();
-
- 
 
 await page.getByRole('link', { name: 'Dabingforum.cz - filmy a seri' }).click();
 await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).click();
