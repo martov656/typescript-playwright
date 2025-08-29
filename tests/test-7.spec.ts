@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe.parallel('Paralelní testy', () => {
 
 test('test', async ({ page }) => {
-   await page.setViewportSize({ width: 1920, height: 1080 });
+  
   await page.goto('https://www.csfd.cz/');
   await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
   await page.getByRole('combobox', { name: 'Vyhledávání' }).click();
@@ -21,7 +21,7 @@ test('test', async ({ page }) => {
 });
 
 test('CSFD - proklikání všech filmů z výsledků', async ({ page }) => {
-   await page.setViewportSize({ width: 1920, height: 1080 });
+ 
   
   await page.goto('https://www.csfd.cz/');
 
