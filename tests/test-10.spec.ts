@@ -65,3 +65,21 @@ await page.getByTestId('mv-breadcrumb-close-button').click();
 
 
 });
+
+test('testReesenot', async ({ page }) => {
+  await page.goto('https://www.imdb.com/');
+    await page.getByTestId('reject-button').click();
+  await page.getByTestId('suggestion-search').click();
+  await page.getByTestId('suggestion-search').fill('Reese Witherspoon');
+  await page.getByRole('link', { name: 'Reese Witherspoon Reese' }).click();
+  await expect(page.getByTestId('hero__primary-text')).toContainText('Reese Witherspoon');
+
+
+await page.getByTestId('cred_producer_12').getByText('The Morning Show').click();
+await expect(page.getByTestId('hero__primary-text')).toContainText('The Morning Show');
+await page.getByTestId('mosaic-img-0-0').click();
+await expect(page.getByTestId('media-viewer__touch-handler')).toBeVisible();
+
+
+
+});

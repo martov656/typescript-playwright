@@ -16,7 +16,7 @@ test('test', async ({ page }) => {
 test('testBaywatch', async ({ page }) => {
   await page.goto('https://www.themoviedb.org/');
   await page.getByPlaceholder('Search for a movie, tv show, person...', { exact: true }).click({
-    button: 'right'
+    
   });
   await page.getByPlaceholder('Search for a movie, tv show, person...', { exact: true }).fill('Pobřežní hlídka');
   await page.getByText('Baywatch in TV Shows').click();
@@ -78,6 +78,19 @@ test('TMDB - Sedmi', async ({ page }) => {
 
   // Ověření, že jsme na stránce filmu
   await expect(page.locator('#original_header')).toContainText('Sedmilhářky');
+
+
+
+await page.getByRole('link', { name: '2. sezóna', exact: true }).click();
+await page.getByText('Co udělaly?').click();
+
+await expect(page.locator('#main_column')).toContainText('Co udělaly?');
+
+await page.locator('.episode_images > div > a').first().click();
+const page1Promise = page.waitForEvent('popup');
+  await page.locator('.block.w-full').first().click();
+  const page1 = await page1Promise;
+
 });
 
 
@@ -127,3 +140,64 @@ test('TMDB - Silo', async ({ page }) => {
 
 
 });
+
+
+test('testBaywatch45', async ({ page }) => {
+  await page.goto('https://www.themoviedb.org/');
+  await page.getByPlaceholder('Search for a movie, tv show, person...', { exact: true }).click({
+    
+  });
+  await page.getByPlaceholder('Search for a movie, tv show, person...', { exact: true }).fill('Pobřežní hlídka');
+  await page.getByText('Baywatch in TV Shows').click();
+  await page.getByRole('link', { name: 'Baywatch', exact: true }).nth(1).click();
+  await expect(page.locator('#original_header')).toContainText('Baywatch');
+  
+});
+
+
+
+test('TMDB - land3', async ({ page }) => {
+  // Explicitně načteme stránku v české mutaci
+  await page.goto('https://www.themoviedb.org/?language=cs-CZ');
+
+  // Vyhledávání
+  const searchBox = page.getByPlaceholder('Hledat film, seriál, osobu...', { exact: true });
+  await searchBox.click();
+  await searchBox.fill('Landman');
+  
+  // Klik na přesný výsledek
+ 
+  await page.getByRole('option', { name: 'Landman v seriálech' }).locator('div').nth(1).click();
+ 
+
+await expect(page.locator('#main')).toContainText('2024');
+
+
+await page.getByRole('link', { name: 'Landman', exact: true }).nth(1).click();
+
+
+  await expect(page.locator('#main')).toContainText('2024');
+
+  await expect(page.locator('#original_header')).toContainText('2024');
+  
+});
+
+
+test('TMDB - Chernobyl', async ({ page }) => {
+
+
+await page.goto('https://www.themoviedb.org/?language=cs-CZ');
+
+
+await page.getByPlaceholder('Hledat film, seriál, osobu...', { exact: true }).fill('Černobyl');
+await page.getByPlaceholder('Hledat film, seriál, osobu...', { exact: true }).press('Enter');
+await expect(page.locator('#main')).toContainText('Černobyl (Chernobyl)');
+await page.getByRole('link', { name: 'Černobyl (Chernobyl)' }).click();
+await expect(page.locator('#original_header')).toContainText('Černobyl');
+await page.getByRole('link', { name: 'Miniseries', exact: true }).click();
+await page.getByText('1. díl').click();
+
+
+
+});
+

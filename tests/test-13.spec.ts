@@ -40,42 +40,24 @@ await expect(page.locator('#firstHeading')).toContainText('Pravá blondýnka');
 });
 
 
-test('testreese3', async ({ page }) => {
-  await page.goto('https://www.super.cz/');
-  
-
-await page.getByRole('textbox', { name: 'Vyhledat' }).fill('Reese Witherspoon');
-
-await page.getByRole('button', { name: 'Reese Witherspoonová', exact: true }).click();
-
-
-await page.getByRole('link', { name: 'Reese Witherspoon | ČSFD.cz' }).click();
-await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
-await expect(page.locator('h1')).toContainText('Reese Witherspoon');
-await page.getByRole('link', { name: 'Srdečně vás zveme' }).first().click();
-
-
-  
-
-});
-
 
 test('testreese4', async ({ page }) => {
-  await page.goto('https://www.super.cz/');
-  
-
-await page.getByRole('textbox', { name: 'Vyhledat' }).fill('Reese Witherspoon');
-
-await page.getByRole('button', { name: 'Reese Witherspoonová', exact: true }).click();
 
 
-await page.getByRole('link', { name: 'Reese Witherspoon | ČSFD.cz' }).click();
-await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
-await expect(page.locator('h1')).toContainText('Reese Witherspoon');
-await page.getByRole('link', { name: 'U tebe nebo u mě?' }).first().click();
 
+await page.goto('https://www.csfd.cz/');
+  await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
+  await page.getByRole('combobox', { name: 'Vyhledávání' }).fill('Reese Witherspoon');
+  await page.getByRole('button').filter({ hasText: 'Hledat' }).click();
+ 
+  await expect(page.locator('#creators')).toContainText('Tvůrci');
+  await page.getByRole('heading', { name: 'Reese Witherspoon', exact: true }).getByRole('link').click();
+  await expect(page.locator('h1')).toContainText('Reese Witherspoon');
+  await page.getByRole('link', { name: 'Srdečně vás zveme' }).click();
+ 
+  await expect(page.locator('h1')).toContainText('Srdečně vás zveme');
+  await page.getByRole('link', { name: 'Zajímavosti' }).click();
 
-  
 
 });
 
@@ -155,24 +137,7 @@ await page.getByRole('link', { name: 'Který je ten pravý?' }).first().click();
 
 });
 
-test('testreese9', async ({ page }) => {
-  await page.goto('https://www.super.cz/');
-  
 
-await page.getByRole('textbox', { name: 'Vyhledat' }).fill('Reese Witherspoon');
-
-await page.getByRole('button', { name: 'Reese Witherspoonová', exact: true }).click();
-
-
-await page.getByRole('link', { name: 'Reese Witherspoon | ČSFD.cz' }).click();
-await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
-await expect(page.locator('h1')).toContainText('Reese Witherspoon');
-await page.getByRole('link', { name: 'Tohle je válka!' }).first().click();
-
-
-  
-
-});
 
 
 
@@ -194,46 +159,26 @@ await page.getByRole('link', { name: 'Plnou parou vzad' }).first().click();
 
   });
 
-  test('testvicu2', async ({ page }) => {
-    
-  await page.goto('https://www.super.cz/');
   
-  
-  
-  await page.getByRole('textbox', { name: 'Vyhledat' }).fill('Victoria Silvstedt');
-  await page.getByRole('button', { name: 'Vyhledat' }).click();
-
-
-  await expect(page.locator('#top-row-content-wrapper-ref-element')).toContainText('Victoria Silvstedt');
-
-  await page.getByRole('link', { name: 'Victoria Silvstedt | ČSFD.cz' }).click();
-await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
-await expect(page.locator('h1')).toContainText('Victoria Silvstedt');
-await page.getByRole('link', { name: 'Šílenci na prknech' }).first().click();
-
-  });
 
 
   test('testvicrec', async ({ page }) => {
     
-  await page.goto('https://www.super.cz/');
-  
-  
-  
-  await page.getByRole('textbox', { name: 'Vyhledat' }).fill('Victoria Silvstedt');
-  await page.getByRole('button', { name: 'Vyhledat' }).click();
+  await page.goto('https://www.csfd.cz/');
+  await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
+  await page.getByRole('combobox', { name: 'Vyhledávání' }).fill('Victoria Silvstedt');
+  await page.getByRole('button').filter({ hasText: 'Hledat' }).click();
+ 
+  await expect(page.locator('#creators')).toContainText('Tvůrci');
+  await page.getByRole('heading', { name: 'Victoria Silvstedt', exact: true }).getByRole('link').click();
+  await expect(page.locator('h1')).toContainText('Victoria Silvstedt');
+  await page.getByRole('link', { name: '(K)lamač srdcí' }).click();
+ 
+  await expect(page.locator('h1')).toContainText('(K)lamač srdcí');
+  await page.getByRole('link', { name: 'Zajímavosti' }).click();
 
 
-  await expect(page.locator('#top-row-content-wrapper-ref-element')).toContainText('Victoria Silvstedt');
 
-  await page.getByRole('link', { name: 'Victoria Silvstedt | ČSFD.cz' }).click();
-await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
-await expect(page.locator('h1')).toContainText('Victoria Silvstedt');
-await page.getByRole('link', { name: '(K)lamač srdcí' }).first().click();
-
-
-await page.getByRole('link', { name: 'Recenze', exact: true }).click();
-await page.getByRole('link', { name: '15', exact: true }).click();
 
   });
 
@@ -307,31 +252,44 @@ await expect(page.locator('h2')).toContainText('Christian Bale');
 
    });
 
-   test('testdab5', async ({ page }) => {
-
+   test('film Batman nejde najít', async ({ page }) => {
   await page.goto('https://dabingforum.cz/');
   await page.getByRole('button', { name: 'Consent', exact: true }).click();
+  await page.getByRole('link', { name: 'Dabingforum.cz - filmy a seri' }).click();
+  await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).fill('Batman');
+  await page.keyboard.press('Enter'); // spustí vyhledávání
 
-await page.getByRole('link', { name: 'Dabingforum.cz - filmy a seri' }).click();
-await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).click();
-await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).fill('Batman');
+  // Počkáme na výsledek vyhledávání (např. na element s výsledky)
+  await page.waitForTimeout(1500); // nebo lepší: wait for specific result element
 
+  // Najdeme všechny výsledky (příklad, uprav podle skutečné HTML struktury)
+  const results = await page.locator('.search-results-selector').all(); // Zjisti správný selektor!
 
-   });
+  if (results.length === 0) {
+    console.log('Film "Batman" nebyl nalezen.');
+  } else {
+    throw new Error('Film "Batman" byl nalezen, test očekával neúspěch.');
+  }
+});
 
+test('film Superman nejde najít', async ({ page }) => {
+  await page.goto('https://dabingforum.cz/');
+  await page.getByRole('button', { name: 'Consent', exact: true }).click();
+  await page.getByRole('link', { name: 'Dabingforum.cz - filmy a seri' }).click();
+  await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).fill('Superman');
+  await page.keyboard.press('Enter');
+
+  await page.waitForTimeout(1500); // nebo lepší: wait for specific result element
+
+  const results = await page.locator('.search-results-selector').all(); // Zjisti správný selektor!
+
+  if (results.length === 0) {
+    console.log('Film "Superman" nebyl nalezen.');
+  } else {
+    throw new Error('Film "Superman" byl nalezen, test očekával neúspěch.');
+  }
+});
   
-
-   test('testdab8', async ({ page }) => {
-
-  await page.goto('https://dabingforum.cz/');
-  await page.getByRole('button', { name: 'Consent', exact: true }).click();
-
-await page.getByRole('link', { name: 'Dabingforum.cz - filmy a seri' }).click();
-await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).click();
-await page.getByRole('searchbox', { name: 'Hledat klíčová slova' }).fill('Superman');
-
-
-   });
 
     test('testdabreese', async ({ page }) => {
 

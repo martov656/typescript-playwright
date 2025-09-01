@@ -1,10 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 
-
-
-
-
   test('test3', async ({ page }) => {
 await page.goto('https://www.imdb.com/');
 await page.getByRole('link', { name: 'Sign in', exact: true }).first().click();
@@ -16,6 +12,12 @@ await page.getByRole('textbox', { name: 'Password' }).fill('Whitesnake1987');
 
 await page.getByRole('button', { name: 'Sign in' }).click();
 await expect(page.locator('#imdbHeader')).toContainText('Martin');
+
+await page.getByText('Martin').first().click();
+
+await page.getByRole('menuitem', { name: 'Sign out' }).click();
+await expect(page.locator('#imdbHeader')).toContainText('Sign in');
+
   });
 
 
