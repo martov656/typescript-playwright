@@ -53,13 +53,36 @@ await page.goto('https://www.csfd.cz/');
   await expect(page.locator('#creators')).toContainText('Tvůrci');
   await page.getByRole('heading', { name: 'Reese Witherspoon', exact: true }).getByRole('link').click();
   await expect(page.locator('h1')).toContainText('Reese Witherspoon');
-  await page.getByRole('link', { name: 'Srdečně vás zveme' }).click();
- 
+
+await page.getByRole('link', { name: 'Srdečně vás zveme' }).first().click();
+
   await expect(page.locator('h1')).toContainText('Srdečně vás zveme');
-  await page.getByRole('link', { name: 'Zajímavosti' }).click();
+
 
 
 });
+
+
+test('testreesejarmark', async ({ page }) => {
+
+
+await page.goto('https://www.csfd.cz/');
+  await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
+  await page.getByRole('combobox', { name: 'Vyhledávání' }).fill('Reese Witherspoon');
+  await page.getByRole('button').filter({ hasText: 'Hledat' }).click();
+ 
+  await expect(page.locator('#creators')).toContainText('Tvůrci');
+  await page.getByRole('heading', { name: 'Reese Witherspoon', exact: true }).getByRole('link').click();
+  await expect(page.locator('h1')).toContainText('Reese Witherspoon');
+
+await page.getByRole('link', { name: 'Jarmark marnosti' }).first().click();
+
+  await expect(page.locator('h1')).toContainText('Jarmark marnosti');
+
+
+
+});
+
 
 test('testreese5', async ({ page }) => {
   await page.goto('https://www.super.cz/');

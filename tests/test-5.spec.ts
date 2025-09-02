@@ -200,6 +200,33 @@ test('tmdbFilmAndUniqueActorsGoBack', async ({ page }) => {
 });
 
 
+test('TMDB - Silo (2023)', async ({ page }) => {
+
+await page.goto('https://www.themoviedb.org/?language=cs-CZ');
+
+  // vyhledání přes searchbox
+  const searchBox = page.getByPlaceholder('Hledat film, seriál, osobu...', { exact: true });
+  await searchBox.click();
+  await searchBox.fill('Jennifer Aniston');
+
+  
+ await page.getByText('Jennifer Aniston v lidech').click({
+    
+  });
+
+await page.getByText('Jennifer Aniston', { exact: true }).click();
+
+ await expect(page.locator('#main')).toContainText('Jennifer Aniston');
+ await page.getByText('Jennifer Aniston', { exact: true }).click();
+ await expect(page.locator('#media_v4')).toContainText('Jennifer Aniston');
+ await page.getByRole('paragraph').filter({ hasText: 'Zkus mě rozesmát' }).getByRole('link').click();
+ 
+ await expect(page.getByRole('img', { name: 'Zkus mě rozesmát' }).nth(1)).toBeVisible();
+
+});
+
+
+
 
 
 

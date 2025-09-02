@@ -8,16 +8,20 @@ test('test', async ({ page }) => {
   await page.getByRole('combobox', { name: 'Vyhledávání' }).fill('Reese Witherspoon');
   await page.getByRole('button').filter({ hasText: 'Hledat' }).click();
   await page.getByRole('heading', { name: 'Reese Witherspoon', exact: true }).getByRole('link').click();
-
-
   
   await expect(page.locator('h1')).toContainText('Reese Witherspoon');
 
-
   await page.getByRole('row', { name: '2025 The Morning Show' }).getByRole('link').click();
 
-
   await expect(page.locator('h1')).toContainText('The Morning Show');
+
+  await page.getByRole('link', { name: 'Série 2' }).click();
+
+await expect(page.locator('h1')).toContainText('Série 2');
+await page.getByRole('link', { name: 'Můj nejmíň oblíbený rok' }).click();
+await expect(page.locator('h1')).toContainText('Můj nejmíň oblíbený rok (S02E01)');
+
+
 
 });
 

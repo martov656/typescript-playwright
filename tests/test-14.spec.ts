@@ -201,3 +201,28 @@ await page.getByText('1. díl').click();
 
 });
 
+
+test('TMDB - Silo2r', async ({ page }) => {
+  await page.goto('https://www.themoviedb.org/?language=cs-CZ');
+  const searchBox = page.getByPlaceholder('Hledat film, seriál, osobu...', { exact: true });
+  await searchBox.click();
+  await searchBox.fill('Silo');
+
+  // Klik na přesný výsledek podle pořadí (pokud jsou dva stejné názvy)
+  await page.getByRole('option', { name: 'Silo v seriálech' }).locator('div').nth(1).click();
+
+  // Ověření roku v detailu
+  await expect(page.locator('#main')).toContainText('2023');
+
+  // Pokud jsou dva stejné odkazy, vyberte ten správný podle pořadí nebo dalšího textu
+  const siloLinks = await page.getByRole('link', { name: 'Silo', exact: true }).all();
+  // Ověřte, že existují alespoň dva odkazy
+  expect(siloLinks.length).toBeGreaterThan(1);
+
+  // Klikněte na druhý odkaz (např. pokud první vede na jiný seriál)
+  await siloLinks[1].click();
+
+  // Ověřte unikátní obsah stránky
+  await expect(page.locator('#main')).toContainText('2023');
+  await expect(page.locator('#original_header')).toContainText('Silo');
+});
