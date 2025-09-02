@@ -200,7 +200,7 @@ test('tmdbFilmAndUniqueActorsGoBack', async ({ page }) => {
 });
 
 
-test('TMDB - Silo (2023)', async ({ page }) => {
+test('TMDB - jen (2023)', async ({ page }) => {
 
 await page.goto('https://www.themoviedb.org/?language=cs-CZ');
 
