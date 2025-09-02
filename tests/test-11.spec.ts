@@ -43,13 +43,16 @@ test('test3', async ({ page }) => {
   await page.getByPlaceholder('Hledat film, seriál...').click();
   await page.getByPlaceholder('Hledat film, seriál...').fill('Salma Hayek');
   await page.getByRole('link', { name: 'Salma Hayek Salma Hayek (1966)' }).click();
+   await expect(page.locator('body')).toContainText('1966');
    await expect(page.getByRole('link', { name: 'Salma Hayek', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Filmy a seriály Filmy a seriá' }).click();
 
   
   await page.getByRole('link', { name: 'Desperado (1995)' }).click();
+   await expect(page.locator('h1')).toContainText('Desperado');
     page.goBack()
   await page.getByRole('button', { name: 'Videa Videa' }).click();
+   
 
 });
 
