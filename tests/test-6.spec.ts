@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 test('test', async ({ page }) => {
    await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('https://www.csfd.cz/');
+  await page.waitForSelector('button:has-text("Souhlasit a zavřít")', { timeout: 10000 });
   await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
   await page.getByRole('combobox', { name: 'Vyhledávání' }).click();
   await page.getByRole('combobox', { name: 'Vyhledávání' }).fill('Reese Witherspoon');
@@ -28,7 +29,12 @@ await expect(page.locator('h1')).toContainText('Můj nejmíň oblíbený rok (S0
 test('testnicole', async ({ page }) => {
    await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto('https://www.csfd.cz/');
-  await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click();
+  // Wait for cookie consent dialog if present
+  const consentButton = page.locator('button:has-text("Souhlasit a zavřít")');
+  if (await consentButton.isVisible({ timeout: 5000 }).catch(() => false)) {
+    await consentButton.click();
+  }
+  await page.getByRole('button', { name: 'Souhlasit a zavřít: Souhlasit' }).click().catch(() => {});
   await page.getByRole('combobox', { name: 'Vyhledávání' }).click();
   await page.getByRole('combobox', { name: 'Vyhledávání' }).fill('Nicole Kidman');
   await page.getByRole('button').filter({ hasText: 'Hledat' }).click();
@@ -66,3 +72,4 @@ test('testnicole5', async ({ page }) => {
   await expect(page.locator('h1')).toContainText('Rodinná aféra');
 
 });
+

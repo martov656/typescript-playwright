@@ -172,35 +172,39 @@ test('tmdbFilmAndUniqueActorsGoBack', async ({ page }) => {
   // Otevřít pouze unikátní jména, max 5
   const openedNames = new Set<string>();
   let openedCount = 0;
+  let actorIndex = 0;
 
-  for (let i = 0; openedCount < 5; i++) {
+  while (openedCount < 5) {
     // Po návratu zpět znovu načíst selektor
     const actorLinks = page.locator('//h3[contains(text(),"Obsazení seriálu")]/following::a[contains(@href,"/person/")]');
     const count = await actorLinks.count();
-    if (i >= count) break;
+    if (actorIndex >= count) break;
 
-    const actor = actorLinks.nth(i);
+    const actor = actorLinks.nth(actorIndex);
     const actorName = (await actor.textContent())?.trim();
+    actorIndex++;
+
     if (actorName && !openedNames.has(actorName)) {
       await actor.scrollIntoViewIfNeeded();
+      const prevUrl = page.url();
       await Promise.all([
-        page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
-        actor.click()
-      ]);
+  page.waitForURL((url: URL) => url.href !== prevUrl && url.href.includes('/person/'), { timeout: 8000 }),
+  actor.click({ force: true })
+]);
       await expect(page.locator('h2 a[href*="/person/"]').first()).toHaveText(actorName);
       openedNames.add(actorName);
       openedCount++;
-      await Promise.all([
-        page.waitForNavigation({ waitUntil: 'domcontentloaded' }),
-        page.goBack()
-      ]);
+     await Promise.all([
+  page.waitForURL((url: URL) => url.href.includes('/tv/'), { timeout: 8000 }),
+  page.goBack()
+]);
       await expect(page.locator('h2 a[href*="/tv/"]').first()).toHaveText(filmTitle ?? '');
     }
   }
 });
+     
 
-
-test('TMDB - Silo (2023)', async ({ page }) => {
+test('TMDB - Jen', async ({ page }) => {
 
 await page.goto('https://www.themoviedb.org/?language=cs-CZ');
 
