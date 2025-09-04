@@ -123,7 +123,7 @@ await page.getByRole('link', { name: 'Silo', exact: true }).nth(1).click();
 });
 
 
-test('TMDB - Silo', async ({ page }) => {
+test('TMDB - This Means War', async ({ page }) => {
   // Explicitně načteme stránku v české mutaci
   await page.goto('https://www.themoviedb.org/?language=cs-CZ');
 
