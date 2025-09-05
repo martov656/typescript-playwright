@@ -28,7 +28,10 @@ test('testKate', async ({ page }) => {
   await expect(page.locator('h1')).toContainText('Kate Beckinsale');
 
 await page.getByRole('link', { name: 'Klik - život na dálkové ovládání', exact: true }).click();
+
+
 await expect(page.locator('h1')).toContainText('Klik - život na dálkové ovládání');
+
 const page1Promise = page.waitForEvent('popup');
   await page.getByRole('link', { name: 'Otevřít IMDb' }).click();
   const page1 = await page1Promise;
@@ -63,16 +66,15 @@ test('testJen', async ({ page }) => {
 
   await page.getByRole('searchbox', { name: 'Vyhledávání' }).fill('Jennifer Aniston');
   await page.getByRole('link', { name: 'Jennifer Aniston Jennifer' }).click();
+ 
+
   await expect(page.locator('h1')).toContainText('Jennifer Aniston');
 
-  await page.getByRole('link', { name: 'Celá filmografie' }).click();
-  await expect(page.locator('#main')).toContainText('Jennifer Aniston');
+await page.getByRole('link', { name: 'Hra s nevěrou', exact: true }).click();
+await expect(page.locator('h1')).toContainText('Hra s nevěrou');
+await page.getByRole('link', { name: 'Clive Owen' }).click();
+await expect(page.locator('h1')).toContainText('Clive Owen');
 
-  await page.getByRole('link', { name: 'Filmografie', exact: true }).click();
-  await page.getByRole('button', { name: 'Zobrazit další' }).click();
-  await page.getByRole('link', { name: 'Tohle je ráj' }).click();
-  await expect(page.locator('h1')).toContainText('Tohle je ráj');
-  await page.locator('section').filter({ hasText: 'Popis a galerie+17George a' }).locator('img').nth(2).click();
   
 
 });
@@ -86,15 +88,11 @@ test('testJen2', async ({ page }) => {
   await page.getByRole('link', { name: 'Jennifer Aniston Jennifer' }).click();
   await expect(page.locator('h1')).toContainText('Jennifer Aniston');
 
-  await page.getByRole('link', { name: 'Celá filmografie' }).click();
-  await expect(page.locator('#main')).toContainText('Jennifer Aniston');
-
-  await page.getByRole('link', { name: 'Filmografie', exact: true }).click();
-  await page.getByRole('button', { name: 'Zobrazit další' }).click();
-  await page.getByRole('link', { name: 'Tohle je ráj' }).click();
-  await expect(page.locator('h1')).toContainText('Tohle je ráj');
-  await page.locator('section').filter({ hasText: 'Popis a galerie+17George a' }).locator('img').nth(2).click();
-  
+await page.getByRole('link', { name: 'Filmografie', exact: true }).click();
+await page.getByRole('link', { name: 'Je prostě báječná' }).click();
+await expect(page.locator('h1')).toContainText('Je prostě báječná');
+await page.locator('section').filter({ hasText: 'Popis a galerie+37Živelná' }).locator('img').nth(2).click();
+await expect(page.getByRole('dialog', { name: 'Galerie' }).locator('img')).toBeVisible();
 
 
 
@@ -171,6 +169,49 @@ await expect(page.getByTestId('hero__primary-text')).toContainText('Thunder in P
 
 
 });
+
+
+test('testbest', async ({ page }) => {
+
+
+  await page.goto('https://www.themoviedb.org/?language=cs');
+  await page.getByRole('heading', { name: 'Nejnavštěvovanější' }).click();
+  await expect(page.locator('#main')).toContainText('Nejnavštěvovanější');
+  
+  await page.getByRole('link', { name: 'Wednesday' }).first().click();
+  await expect(page.locator('#original_header')).toContainText('Wednesday');
+
+
+
+
+
+});
+
+
+
+test('Proklik 5 nejnavštěvovanějších titulů', async ({ page }) => {
+  await page.goto('https://www.themoviedb.org/?language=cs');
+
+ 
+  await page.getByRole('link', { name: 'Kontaktujte nás' }).click();
+  await expect(page.locator('#main')).toContainText('Get In Touch');
+
+  
+page.goBack()
+
+
+await page.getByLabel('Filmy').click();
+await page.getByRole('link', { name: 'Oblíbené' }).click();
+await page.getByText('A Line of Fire').click();
+await expect(page.locator('#original_header')).toContainText('A Line of Fire');
+
+
+  
+});
+
+
+
+
 
 
 
